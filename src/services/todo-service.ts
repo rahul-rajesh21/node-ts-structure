@@ -1,4 +1,4 @@
-import { ITodo } from "@models/todo-models";
+import { ITodo, ITodoInput } from "@models/todo-models";
 import { PrismaClient } from "@prisma/client";
 
 
@@ -25,9 +25,10 @@ export  default class TodoService {
     //  * @param user
     //  * @returns
     //  */
-    // addOne(user: ITodo): Promise<void> {
-    //     return userRepo.add(user);
-    // }
+    async addOne(user: ITodoInput): Promise<ITodo> {
+        const data = await this.prisma.todo.create({data: user});
+        return data;
+    }
 
     // /**
     //  * Update one user.

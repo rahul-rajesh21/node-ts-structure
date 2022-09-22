@@ -2,7 +2,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import path from 'path';
 import helmet from 'helmet';
-
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import StatusCodes from 'http-status-codes';
 import 'express-async-errors';
@@ -11,6 +11,7 @@ import apiRouter from './routes/api';
 import logger from 'jet-logger';
 import { CustomError,RouteNotFound } from 'src/utils/errors';
 import config from './config/config'
+
 
 // Constants
 const app = express();
@@ -34,6 +35,16 @@ if (config.env === 'development') {
 if (config.env === 'production') {
     app.use(helmet());
 }
+
+
+const allowedOrigins = ['*'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+// Then pass these options to cors:
+app.use(cors(options));
 
 
 /***********************************************************************************

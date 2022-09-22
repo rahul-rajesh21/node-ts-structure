@@ -8,3 +8,9 @@ export interface ITodo {
 }
 
 
+export interface ITodoInput{
+    title: string;
+    startDate: Date;
+    endDate: Date;
+}
+

@@ -1,24 +1,13 @@
-import StatusCodes from 'http-status-codes';
-import { Request, Response, Router,NextFunction } from 'express';
-
+import {Router} from 'express';
 import userService from '@services/user-service';
 import { ParamMissingError } from 'src/utils/errors';
-import TodoController  from 'src/controllers/todo.controller';
+import TodoController  from '../controllers/todo.controller';
 
 
 
 // Constants
 const router = Router();
-const { CREATED, OK } = StatusCodes;
 const todoController = new TodoController();
-
-// Paths
-export const endpoint = {
-    get: '',
-    add: '/add',
-    update: '/update',
-    delete: '/delete/:id',
-} as const;
 
 
 /**
@@ -30,16 +19,7 @@ router.get('/all', todoController.getAllTodo);
 /**
  * Add one user.
  */
-// router.post(endpoint.add, async (req: Request, res: Response) => {
-//     const { user } = req.body;
-//     // Check param
-//     if (!user) {
-//         throw new ParamMissingError();
-//     }
-//     // Fetch data
-//     await userService.addOne(user);
-//     return res.status(CREATED).end();
-// });
+    router.post('/', todoController.postTodo);
 
 
 // /**
